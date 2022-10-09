@@ -1,11 +1,11 @@
-import { Button, Form } from 'react-bootstrap'
-import styles from './login.module.css'
+import { Button, Form } from 'react-bootstrap';
+import styles from './login.module.css';
 
 export default function Login() {
   const { Group, Label, Control, Select } = Form;
   return (
     <section className={styles.formWrapper}>
-      <Form className={styles.form + " " + styles.submit}>
+      <Form className={styles.form + ' ' + styles.submit}>
         <Group className='mb-3' controlId='formBasicEmail'>
           <Label>Username</Label>
           <Control type='username' placeholder='Username'></Control>
@@ -16,9 +16,10 @@ export default function Login() {
           <Control type='password' placeholder='Password'></Control>
         </Group>
 
-      <Button variant='primary' type='submit'>Submit</Button>
-    </Form>
+        <Button variant='primary' type='submit'>
+          Submit
+        </Button>
+      </Form>
     </section>
-    
-  )
+  );
 }

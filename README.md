@@ -28,7 +28,8 @@ Requires [git](https://git-scm.com/downloads) and [NodeJs](https://nodejs.org/en
 
 - Functions
   ```typescript
-  export function myFunctionName(arg0: number, arg1: number): number { // <- return type
+  export function myFunctionName(arg0: number, arg1: number): number {
+    // <- return type
     return arg0 + arg1;
   } // Export makes it "public" without export, it would be private
   // Also number type covers both int and float and double

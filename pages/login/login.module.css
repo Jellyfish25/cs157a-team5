@@ -1,14 +1,14 @@
 .form {
-    width: 20%;
-  }
-  
-  .formWrapper {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    margin-top: 160px;
-  }
-  
-  .submit {
-    margin: 0 auto;
-  }
+  width: 20%;
+}
+
+.formWrapper {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 160px;
+}
+
+.submit {
+  margin: 0 auto;
+}
