@@ -1,3 +1,9 @@
 .container {
-  padding: 160px 160px;
+  margin: auto;
+  text-align: center;
+  margin-top: 8rem;
+  
+  font-size: 50px;
+  align-items: center;
+  justify-content: center;
 }
