@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint && prettier -c .",
-    "format": "prettier -w ."
+    "format": "prettier -w .",
+    "test": "jest"
   },
   "dependencies": {
     "bootstrap": "^5.2.2",
@@ -16,7 +17,8 @@
     "next": "12.2.5",
     "react": "18.2.0",
     "react-bootstrap": "^2.5.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "serverless-mysql": "^1.5.4"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
