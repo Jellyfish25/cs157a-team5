@@ -8,16 +8,15 @@ const Home: NextPage = () => {
   return (
     <div className={styles.container}>
       <Group className='mb-3'>
-      Pick One:
-      <br></br>
-      <br></br>
-      <Link href='/register'>REGISTER</Link>
-      <br></br>
-      <br></br>
-      <Link href='/login'>LOGIN</Link>
+        Pick One:
+        <br></br>
+        <br></br>
+        <Link href='/register'>REGISTER</Link>
+        <br></br>
+        <br></br>
+        <Link href='/login'>LOGIN</Link>
       </Group>
     </div>
-    
   );
 };
 
