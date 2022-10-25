@@ -1,0 +1,14 @@
+.form {
+    width: 70%;
+  }
+  
+  .formWrapper {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .submit {
+    margin: 0 auto;
+  }
+  
