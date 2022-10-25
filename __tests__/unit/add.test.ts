@@ -1,3 +1,3 @@
-it('Tests jest', () => {
-  expect(1 + 2).toBe(3);
+it('Throwaway test just to make sure jest works', () => {
+  expect(2 + 2).toBe(4);
 });

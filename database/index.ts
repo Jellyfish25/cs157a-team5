@@ -2,15 +2,12 @@ import mysql from 'serverless-mysql';
 
 const db = mysql({
   config: {
-    host: process.env.DB_SCHEMA || 'localhost',
-    user: process.env.DB_USER || 'root',
-    password: process.env.DB_PASSWORD || 'password',
+    host: process.env.HOST || 'localhost',
+    user: process.env.USER || 'root',
+    password: process.env.PASSWORD || 'password',
+    port: 3306,
   },
 });
-
-// Initialize db
-db.query('CREATE DATABASE IF NOT EXISTS team5');
-db.query('USE team5');
 
 /**
  *
