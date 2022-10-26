@@ -1,0 +1,19 @@
+.container {
+  display: grid;
+  grid-template: 1fr 1fr / 1fr 1fr 1fr 1fr;
+}
+
+.imgContainer {
+  height: 7em;
+  position: relative;
+  width: 3em;
+}
+
+.summary {
+  display: flex;
+  justify-content: space-between;
+}
+
+.summaryContainer {
+  margin: 1em;
+}
