@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "next lint && prettier -c .",
     "format": "prettier -w .",
-    "test": "jest"
+    "test": "jest",
+    "migrate": "node ./database/reset"
   },
   "dependencies": {
     "bootstrap": "^5.2.2",
