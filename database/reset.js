@@ -1,4 +1,7 @@
 const mysql = require('serverless-mysql');
+const users = require('../mocks/users.json');
+const medias = require('../mocks/media.json');
+const { createSecretKey } = require('crypto');
 
 (async () => {
   const db = mysql({
@@ -54,11 +57,11 @@ const mysql = require('serverless-mysql');
     );`);
 
   await db.query(`CREATE TABLE Reviewed(
-    customerUsername VARCHAR(255) NOT NULL,
+    employeeUsername VARCHAR(255) NOT NULL,
     mediaTitle VARCHAR(255) NOT NULL,
     decision VARCHAR(20) CHECK (decision = 'approved' OR decision = 'denied' OR decision = 'pending'),
     reason VARCHAR(255),
-    FOREIGN KEY (customerUsername) REFERENCES Customer(username),
+    FOREIGN KEY (employeeUsername) REFERENCES Employee(username),
     FOREIGN KEY (mediaTitle) REFERENCES Media(title)
     );`);
 
@@ -87,68 +90,100 @@ const mysql = require('serverless-mysql');
     FOREIGN KEY (mediaTitle) REFERENCES Media(title)
   );`);
 
-  await db.query(
-    `insert into User (username, password) values ('Isadore', 'TQ5I1hM1kOn3');`
-  );
-  await db.query(
-    `insert into User (username, password) values ('Augustin', 'lXGWYPRMZGE');`
-  );
-  await db.query(
-    `insert into User (username, password) values ('Kenyon', 'XgHW6apPVFva');`
-  );
-  await db.query(
-    `insert into User (username, password) values ('Hort', 'x5fsVP5j');`
-  );
-  await db.query(
-    `insert into User (username, password) values ('Bastien', 'jgoOwRIP');`
-  );
-  await db.query(
-    `insert into User (username, password) values ('Vita', '0t0yjp5plUm0');`
-  );
-  await db.query(
-    `insert into User (username, password) values ('Abe', 'xzVCIn');`
-  );
-  await db.query(
-    `insert into User (username, password) values ('Fayette', 'KoROxOe');`
-  );
-  await db.query(
-    `insert into User (username, password) values ('Spike', 'hsvtF4');`
-  );
-  await db.query(
-    `insert into User (username, password) values ('Shelden', 'TAIYmoGFlKY');`
-  );
-  await db.query(
-    `insert into User (username, password) values ('Emelina', 'nfCZEwi54');`
-  );
-  await db.query(
-    `insert into User (username, password) values ('Nonnah', 'bbW2s03');`
-  );
-  await db.query(
-    `insert into User (username, password) values ('Clement', '9rig21FZDEUG');`
-  );
-  await db.query(
-    `insert into User (username, password) values ('Quintana', 'QFyk3Gf0bYKH');`
-  );
-  await db.query(
-    `insert into User (username, password) values ('Jesus', 'qLJC5dkNIG');`
-  );
-  await db.query(
-    `insert into User (username, password) values ('Carley', 'AwC4RTu');`
-  );
-  await db.query(
-    `insert into User (username, password) values ('Cymbre', 'e9NN6T8Rnp');`
-  );
-  await db.query(
-    `insert into User (username, password) values ('Tabina', 'tgDh2xNBgKw');`
-  );
-  await db.query(
-    `insert into User (username, password) values ('Vaclav', '5o8GV5K');`
-  );
-  await db.query(
-    `insert into User (username, password) values ('Julie', 'zlFZcoaosWL');`
-  );
+  let i = 0;
+  const creators = [];
+  const customers = [];
+  const employees = [];
+  for (const user of users) {
+    const { username, password } = user;
+    await db.query(`INSERT INTO User VALUES('${username}', '${password}')`);
+    if (i < 10) {
+      await db.query(
+        `INSERT INTO Customer VALUES('${username}', '${
+          ['credit card', 'debit card', 'gift card'][
+            Math.floor(Math.random() * 3)
+          ]
+        }')`
+      );
+      customers.push(user);
+    } else if (i < 20) {
+      await db.query(
+        `INSERT INTO Employee VALUES('${username}', '${
+          Math.round((Math.random() * 3 + 15) * 100) / 100
+        }')`
+      );
+      employees.push(user);
+    } else {
+      await db.query(
+        `INSERT INTO ContentCreator VALUES('${username}', '${
+          Math.round((Math.random() * 4 + 1) * 100) / 100
+        }')`
+      );
+      creators.push(user);
+    }
+    i++;
+  }
+
+  for (const media of medias) {
+    const { title, cost, inventory } = media;
+    await db.query(
+      `INSERT INTO Media VALUES('${title}', ${cost}, ${inventory}, '${
+        ['game', 'book', 'movie', 'musicAlbum'][Math.floor(Math.random() * 4)]
+      }')`
+    );
+    const index = [Math.floor(Math.random() * creators.length)];
+    const { username } = creators[index];
+    await db.query(
+      `INSERT INTO Created VALUES('${username}', '${title}', '${new Date()
+        .toISOString()
+        .slice(0, 19)
+        .replace('T', ' ')}')`
+    );
+  }
+
+  for (let i = 0; i < 10; i++) {
+    await db.query(
+      `INSERT INTO Reminded VALUES('${getRandom(employees).username}', '${
+        getRandom(customers).username
+      }', ${Math.floor(Math.random() * 4)}, '${new Date()
+        .toISOString()
+        .slice(0, 19)
+        .replace('T', ' ')}')`
+    );
+    const decision = getRandom(['approved', 'denied', 'pending']);
+    const reason = (() => {
+      if (decision == 'approved') return 'No Problems.';
+      else if (decision == 'denied') return 'Inappropriate Content.';
+      else return '';
+    })();
+    await db.query(
+      `INSERT INTO Reviewed VALUES('${getRandom(employees).username}', '${
+        getRandom(medias).title
+      }', '${decision}', '${reason}')`
+    );
+    await db.query(
+      `INSERT INTO rented VALUES('${getRandom(customers).username}', '${
+        getRandom(medias).title
+      }', '${new Date().toISOString().slice(0, 19).replace('T', ' ')}')`
+    );
+    await db.query(
+      `INSERT INTO evaluated VALUES('${getRandom(customers).username}', '${
+        getRandom(medias).title
+      }', ${Math.round((Math.random() * 4 + 1) * 10) / 10}, '${getRandom([
+        'Alright.',
+        'Poor',
+        'This made me wanna stop consuming media.',
+        '.',
+        'Awesome!',
+      ])}')`
+    );
+  }
   await db.end();
   db.quit();
 
   console.log('Db Migrated Succesfully');
 })();
+
+const getRandom = (arr) => {
+  return arr[Math.floor(Math.random() * arr.length)];
+};

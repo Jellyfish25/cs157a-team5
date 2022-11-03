@@ -1,0 +1,52 @@
+[
+  {
+    "title": "Firehouse Dog",
+    "cost": 27.64,
+    "inventory": 578
+  },
+  {
+    "title": "Alatriste",
+    "cost": 28.53,
+    "inventory": 154
+  },
+  {
+    "title": "Inkheart",
+    "cost": 1.7,
+    "inventory": 184
+  },
+  {
+    "title": "How to Irritate People",
+    "cost": 22.88,
+    "inventory": 770
+  },
+  {
+    "title": "Naked",
+    "cost": 14.88,
+    "inventory": 480
+  },
+  {
+    "title": "OSS 117 - Lost in Rio (OSS 117: Rio ne répond plus)",
+    "cost": 26.86,
+    "inventory": 958
+  },
+  {
+    "title": "Profound Desires of the Gods (Kamigami no fukaki yokubo) ",
+    "cost": 18.45,
+    "inventory": 937
+  },
+  {
+    "title": "Planet of Snail",
+    "cost": 23.86,
+    "inventory": 235
+  },
+  {
+    "title": "Proof",
+    "cost": 5.82,
+    "inventory": 151
+  },
+  {
+    "title": "Godzilla: Final Wars (Gojira: Fainaru uôzu)",
+    "cost": 20.04,
+    "inventory": 622
+  }
+]
