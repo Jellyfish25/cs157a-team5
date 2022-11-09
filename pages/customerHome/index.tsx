@@ -1,4 +1,5 @@
 import styles from './customerHome.module.css';
+import MediaTable from '../../components/mediaTable';
 import { Button, Form } from 'react-bootstrap';
 
 export default function CustomerHome() {
@@ -16,8 +17,14 @@ export default function CustomerHome() {
           </Select>
         </Group>
       </section>
-
-      <Group className='mb-3' controlId='formBasicEmail'>
+      <MediaTable
+      items={Array.from({ length: 10 }, (_, i) => ({
+        name: 'SpiderMan-' + i,
+        src: '/spider-man.webp',
+      }))}
+    />      
+    
+        <Group className='mb-3' controlId='formBasicEmail'>
         <Control type='username' placeholder='Search for Media Title'></Control>
       </Group>
     </section>
