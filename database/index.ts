@@ -6,7 +6,7 @@ const db = mysql({
     user: process.env.USER || 'root',
     password: process.env.PASSWORD || 'password',
     port: 3306,
-    database: process.env.DB || 'team5'
+    database: process.env.DB || 'team5',
   },
 });
 
