@@ -1,7 +1,8 @@
 import { Button, Form, FormControlProps, Alert } from 'react-bootstrap';
 import { ChangeEventHandler, useState, FormEventHandler } from 'react';
+import { roleRequired } from '../../decorators';
 
-export default function CreateMedia() {
+export default roleRequired('contentCreator', function CreateMedia() {
   const { Group, Label, Control, Select } = Form;
 
   const [formState, setFormState] = useState({
@@ -81,4 +82,4 @@ export default function CreateMedia() {
       {ok && <Alert variant='success'>{ok}</Alert>}
     </section>
   );
-}
+});
