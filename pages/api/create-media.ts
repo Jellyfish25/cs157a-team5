@@ -13,6 +13,10 @@ export default async function handler(
       .json({ error: 'Invalid data! Title, Cost, or Type are empty.' });
     return;
   }
+
+  if (req.method != 'POST') {
+    res.status(405).json({ error: 'Wrong method' });
+  }
   try {
     await query(
       `INSERT INTO media VALUES('${title}', ${Number(cost)}, 100, '${type}')`
@@ -29,7 +33,7 @@ export default async function handler(
       }
       return;
     }
-    console.log(e);
+    console.error(e);
     res.status(500).json({ error: e.message });
   }
 }
