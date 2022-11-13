@@ -6,10 +6,10 @@ import { useUserCookie } from './useUserCookie';
 export const AuthContext = createContext<User | null>(null);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const { user } = useUserCookie().userCookie;
+  const { userCookie } = useUserCookie();
 
   return (
-    <AuthContext.Provider value={user ? user : null}>
+    <AuthContext.Provider value={userCookie || null}>
       {children}
     </AuthContext.Provider>
   );

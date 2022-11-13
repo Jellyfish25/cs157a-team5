@@ -7,7 +7,7 @@ export function forwardOnAuth(Page: NextPage) {
     const { userCookie } = useUserCookie();
     useEffect(() => {
       if (!userCookie) return;
-      const { userType } = userCookie.user;
+      const { userType } = userCookie;
       if (userType === 'customer') {
         window.location.replace('/customerHome');
       } else if (userType === 'employee') {

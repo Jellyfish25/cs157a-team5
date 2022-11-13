@@ -13,5 +13,5 @@ export const useUserCookie = () => {
   const deleteUserCookie = (options?: CookieSetOptions) => {
     return deleteCookie('user', options);
   };
-  return { userCookie, setUserCookie, deleteUserCookie };
+  return { userCookie: userCookie.user, setUserCookie, deleteUserCookie };
 };
