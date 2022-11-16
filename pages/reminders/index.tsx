@@ -1,7 +1,8 @@
 import { Button, Form } from 'react-bootstrap';
 import styles from './reminders.module.css';
+import { roleRequired } from '../../decorators';
 
-export default function Reminders() {
+export default roleRequired('employee', function Reminders() {
   const { Group, Label, Control, Select } = Form;
   return (
     <section className={styles.formWrapper}>
@@ -44,4 +45,4 @@ export default function Reminders() {
       <section>Hello, Employee!</section>
     </section>
   );
-}
+});
