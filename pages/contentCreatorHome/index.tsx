@@ -1,6 +1,7 @@
 import MediaTable from '../../components/mediaTable';
+import { roleRequired } from '../../decorators';
 
-export default function ContentCreatorHome() {
+export default roleRequired('contentCreator', function ContentCreatorHome() {
   return (
     <MediaTable
       items={Array.from({ length: 10 }, (_, i) => ({
@@ -9,4 +10,4 @@ export default function ContentCreatorHome() {
       }))}
     />
   );
-}
+});

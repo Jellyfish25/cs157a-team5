@@ -1,7 +1,8 @@
 import { Button, Form } from 'react-bootstrap';
 import styles from './mediaRequests.module.css';
+import { roleRequired } from '../../decorators';
 
-export default function mediaRequests() {
+export default roleRequired('employee', function mediaRequests() {
   const { Group, Label, Control, Select } = Form;
   return (
     <section className={styles.formWrapper}>
@@ -52,4 +53,4 @@ export default function mediaRequests() {
       <section>Hello, Employee!</section>
     </section>
   );
-}
+});

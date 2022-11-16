@@ -1,8 +1,9 @@
 import styles from './employeeHome.module.css';
 import MediaTable from '../../components/mediaTable';
 import { Button, Form } from 'react-bootstrap';
+import { roleRequired } from '../../decorators';
 
-export default function EmployeeHome() {
+export default roleRequired('employee', function EmployeeHome() {
   const { Group, Label, Control, Select } = Form;
   return (
     <section className={styles.formWrapper}>
@@ -38,4 +39,4 @@ export default function EmployeeHome() {
       <section>Hello, Employee!</section>
     </section>
   );
-}
+});
