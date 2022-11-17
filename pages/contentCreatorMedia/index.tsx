@@ -29,7 +29,7 @@ export default roleRequired('contentCreator', function ContentCreatorMedia() {
           }))}
         />
         <br></br>
-        {/* replace "username" with the current user's account name */}
+        {/* replace "username" with the current user's account */}
         publisher: username
       </section>
 
@@ -40,7 +40,7 @@ export default roleRequired('contentCreator', function ContentCreatorMedia() {
               key={idx}
               id={`radio-${idx}`}
               type="radio"
-              variant={idx == 1 ? 'light' : 'light'}
+              variant="light"
               name="radio"
               value={radio.value}
               checked={radioValue === radio.value}
