@@ -10,5 +10,13 @@ export const register = async (formState: User & { password: string }) => {
   });
   return { res, data: await res.json() };
 };
-
-export const login = async (formState: {}) => {};
+export const login = async (formState: User & { password: string }) => {
+  const res = await fetch('http://localhost:3000/api/login', {
+    method: 'POST',
+    body: JSON.stringify(formState),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  return { res, data: await res.json() };
+};
