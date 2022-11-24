@@ -1,2 +1,2 @@
-export * from './authRequired';
+export * from './roleRequired';
 export * from './forwardOnAuth';

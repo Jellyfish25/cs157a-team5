@@ -1,11 +1,22 @@
 import { Button, Form, FormControlProps, Alert } from 'react-bootstrap';
-import { ChangeEventHandler, useState, FormEventHandler } from 'react';
+import {
+  ChangeEventHandler,
+  useState,
+  FormEventHandler,
+  useContext,
+} from 'react';
 import { roleRequired } from '../../decorators';
+import { AuthContext } from '../../hooks';
+import type { Media } from '../../types';
+import { createMedia } from '../../api';
+import { useRouter } from 'next/router';
 
 export default roleRequired('contentCreator', function CreateMedia() {
   const { Group, Label, Control, Select } = Form;
+  const router = useRouter();
+  const user = useContext(AuthContext);
 
-  const [formState, setFormState] = useState({
+  const [formState, setFormState] = useState<Media>({
     title: '',
     cost: '',
     type: '',
@@ -15,16 +26,13 @@ export default roleRequired('contentCreator', function CreateMedia() {
 
   const onSubmit: FormEventHandler = async (evt) => {
     evt.preventDefault();
-    const res = await fetch('http://localhost:3000/api/create-media', {
-      method: 'POST',
-      body: JSON.stringify(formState),
-    });
-    const data = await res.json();
+    if (!user) throw new Error('No user in role-protected page.');
+    const { res, data } = await createMedia(user.username, formState);
     if (!res.ok) {
       setErrMsg(data.error);
     } else {
       setOk(data.message);
-      window.location.href = '/';
+      router.push('/');
     }
   };
 

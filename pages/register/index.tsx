@@ -5,10 +5,11 @@ import { register } from '../../api';
 import styles from './register.module.css';
 import { User } from '../../types';
 import { forwardOnAuth } from '../../decorators';
+import { useRouter } from 'next/router';
 
 export default forwardOnAuth(function Register() {
   const { Group, Label, Control, Select } = Form;
-
+  const router = useRouter();
   const { setUserCookie } = useUserCookie();
 
   const [formState, setFormState] = useState<User & { password: string }>({
@@ -29,7 +30,7 @@ export default forwardOnAuth(function Register() {
       setOk(data.message);
       const { username, userType } = formState;
       setUserCookie({ username, userType });
-      window.location.href = '/';
+      router.push('/');
     }
   };
 

@@ -1,7 +1,11 @@
 import { useCookies } from 'react-cookie';
 import { CookieSetOptions } from 'universal-cookie';
 import type { User } from '../types';
-export const useUserCookie = () => {
+export const useUserCookie = (): {
+  userCookie: User;
+  setUserCookie: (newCookie: User, options?: CookieSetOptions) => void;
+  deleteUserCookie: (options?: CookieSetOptions) => void;
+} => {
   const [userCookie, setCookie, deleteCookie] = useCookies<
     'user',
     { user: User }

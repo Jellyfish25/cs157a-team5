@@ -11,7 +11,7 @@ interface MediaTableProps {
   items: MediaSummaryProps[];
 }
 
-export default function MediaTable({ items }: MediaTableProps) {
+export function MediaTable({ items }: MediaTableProps) {
   const [page, setPage] = useState<number>(0);
 
   return (

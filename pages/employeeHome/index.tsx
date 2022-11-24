@@ -1,5 +1,5 @@
 import styles from './employeeHome.module.css';
-import MediaTable from '../../components/mediaTable';
+import MediaTable from '../../components/MediaTable';
 import { Button, Form } from 'react-bootstrap';
 
 export default function EmployeeHome() {

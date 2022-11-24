@@ -1,7 +1,6 @@
 const mysql = require('serverless-mysql');
 const users = require('../mocks/users.json');
 const medias = require('../mocks/media.json');
-const { createSecretKey } = require('crypto');
 
 (async () => {
   const db = mysql({
