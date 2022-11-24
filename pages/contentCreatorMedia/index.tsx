@@ -1,5 +1,5 @@
 import styles from './contentCreatorMedia.module.css';
-import MediaTable from '../../components/mediaTable';
+import { MediaTable } from '../../components';
 import { Button, Form } from 'react-bootstrap';
 import { roleRequired } from '../../decorators';
 import { arrayBuffer } from 'stream/consumers';
