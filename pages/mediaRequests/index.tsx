@@ -1,4 +1,5 @@
 import { Button, Form } from 'react-bootstrap';
+import Link from 'next/link';
 import styles from './mediaRequests.module.css';
 import { roleRequired } from '../../decorators';
 
@@ -15,9 +16,9 @@ export default roleRequired('employee', function mediaRequests() {
           <option value='Music'>Music</option>
         </Select>
         <br></br>
-        <Label>Review Media Requests</Label>
+        <Link href='/employeeHome'>Employee Home</Link>
         <br></br>
-        <Label>Send Reminders</Label>
+        <Link href='/reminders'>Send Reminders</Link>
       </Group>
 
       <section className={styles.h1Styles}>

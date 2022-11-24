@@ -20,7 +20,6 @@ export default roleRequired('contentCreator', function ContentCreatorMedia() {
 
   return (
     <section className={styles.formWrapper}>
-
       <section className={styles.h1Styles}>
         <MediaTable
           items={Array.from({ length: 1 }, (_, i) => ({
@@ -39,21 +38,17 @@ export default roleRequired('contentCreator', function ContentCreatorMedia() {
             <ToggleButton
               key={idx}
               id={`radio-${idx}`}
-              type="radio"
-              variant="light"
-              name="radio"
+              type='radio'
+              variant='light'
+              name='radio'
               value={radio.value}
               checked={radioValue === radio.value}
-              onChange={(e) => setRadioValue(e.currentTarget.value)}
-            >
+              onChange={(e) => setRadioValue(e.currentTarget.value)}>
               {radio.name}
             </ToggleButton>
           ))}
         </ButtonGroup>
-        <Group className={styles.contentBorder}>
-          
-          Template text
-        </Group>
+        <Group className={styles.contentBorder}>Template text</Group>
         {/* <Button variant='light' type='submit' className={styles.buttonStyle}>
             Preview
           </Button>

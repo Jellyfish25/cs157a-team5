@@ -1,4 +1,5 @@
 import styles from './employeeHome.module.css';
+import Link from 'next/link';
 import MediaTable from '../../components/mediaTable';
 import { Button, Form } from 'react-bootstrap';
 import { roleRequired } from '../../decorators';
@@ -16,9 +17,9 @@ export default roleRequired('employee', function EmployeeHome() {
           <option value='Music'>Music</option>
         </Select>
         <br></br>
-        <Label>Review Media Requests</Label>
+        <Link href='/mediaRequests'>Review Media Requests</Link>
         <br></br>
-        <Label>Send Reminders</Label>
+        <Link href='/reminders'>Send Reminders</Link>
       </Group>
 
       <section className={styles.h1Styles}>
