@@ -29,7 +29,11 @@ export default async function handler(
       `SELECT username FROM contentCreator WHERE username='${username}'`
     )) as User[];
     let userType;
-    userType = result1 ? 'customer' : result2 ? 'employee' : 'contentCreator';
+    userType = result1[0]
+      ? 'customer'
+      : result2[0]
+      ? 'employee'
+      : 'contentCreator';
     res.status(200).json({ username: result[0].username, userType });
   } else {
     res.status(403).end();

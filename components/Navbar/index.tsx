@@ -15,10 +15,10 @@ export function Navbar() {
   useEffect(() => {
     if (!userCookie) {
       setUser(false);
+      return;
     }
     setUser(true);
   }, [userCookie]);
-
   return !user ? (
     <nav>
       <button onClick={() => router.push('/login')}>Sign In</button>

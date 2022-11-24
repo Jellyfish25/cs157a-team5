@@ -35,11 +35,7 @@ export default forwardOnAuth(function Login() {
 
   return (
     <section className={styles.formWrapper}>
-      <Form
-        className={styles.form + ' ' + styles.submit}
-        onSubmit={() =>
-          setUserCookie({ username: 'TestUser', userType: 'customer' })
-        }>
+      <Form className={styles.form + ' ' + styles.submit} onSubmit={onSubmit}>
         <Group className='mb-3' controlId='formBasicEmail'>
           <Label>Username</Label>
           <Control

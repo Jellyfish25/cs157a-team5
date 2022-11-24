@@ -22,7 +22,6 @@ export function forwardOnAuth(Page: NextPage) {
         router.replace('/contentCreatorHome');
       }
     }, [userCookie, router]);
-    console.log(userCookie);
     return !user ? <Page /> : null;
   };
 }
