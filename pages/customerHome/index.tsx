@@ -1,8 +1,9 @@
 import styles from './customerHome.module.css';
 import { MediaTable } from '../../components';
 import { Button, Form } from 'react-bootstrap';
+import { roleRequired } from '../../decorators';
 
-export default function CustomerHome() {
+export default roleRequired('customer', function CustomerHome() {
   const { Group, Label, Control, Select } = Form;
   return (
     <section className={styles.formWrapper}>
@@ -34,4 +35,4 @@ export default function CustomerHome() {
       <section>Hello, Customer!</section>
     </section>
   );
-}
+});

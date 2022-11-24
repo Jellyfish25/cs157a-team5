@@ -1,8 +1,10 @@
 import styles from './employeeHome.module.css';
-import MediaTable from '../../components/MediaTable';
-import { Button, Form } from 'react-bootstrap';
+import Link from 'next/link';
+import { MediaTable } from '../../components';
+import { Form } from 'react-bootstrap';
+import { roleRequired } from '../../decorators';
 
-export default function EmployeeHome() {
+export default roleRequired('employee', function EmployeeHome() {
   const { Group, Label, Control, Select } = Form;
   return (
     <section className={styles.formWrapper}>
@@ -15,9 +17,9 @@ export default function EmployeeHome() {
           <option value='Music'>Music</option>
         </Select>
         <br></br>
-        <Label>Review Media Requests</Label>
+        <Link href='/mediaRequests'>Review Media Requests</Link>
         <br></br>
-        <Label>Send Reminders</Label>
+        <Link href='/reminders'>Send Reminders</Link>
       </Group>
 
       <section className={styles.h1Styles}>
@@ -38,4 +40,4 @@ export default function EmployeeHome() {
       <section>Hello, Employee!</section>
     </section>
   );
-}
+});
