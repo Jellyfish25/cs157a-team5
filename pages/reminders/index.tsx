@@ -60,7 +60,7 @@ export default roleRequired('employee', function Reminders() {
 
       <section className={styles.h1Styles}>
         <Form className={styles.form + ' ' + styles.submit}>
-        <h1>Reminders</h1>
+          <h1>Reminders</h1>
           <h6>
             Send reminders to naughty customers who forget to return their media
           </h6>

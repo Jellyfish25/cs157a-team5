@@ -180,10 +180,10 @@ const medias = require('../mocks/media.json');
         .replace('T', ' ')}')`
     );
   }
-  await db.query(`INSERT INTO user VALUES('u','u'),('e','e'),('c','c')`)
-  await db.query(`INSERT INTO customer VALUES('u','credit card')`)
-  await db.query(`INSERT INTO employee VALUES('e',5.99)`)
-  await db.query(`INSERT INTO contentcreator VALUES('c',4.35)`)
+  await db.query(`INSERT INTO user VALUES('u','u'),('e','e'),('c','c')`);
+  await db.query(`INSERT INTO customer VALUES('u','credit card')`);
+  await db.query(`INSERT INTO employee VALUES('e',5.99)`);
+  await db.query(`INSERT INTO contentcreator VALUES('c',4.35)`);
   await db.end();
   db.quit();
 

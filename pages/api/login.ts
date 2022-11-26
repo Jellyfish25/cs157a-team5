@@ -17,7 +17,6 @@ export default async function handler(
   const result = (await query(
     `SELECT username FROM user WHERE username='${username}' AND password='${password}'`
   )) as User[];
-  console.log(req.body);
   if (result) {
     const result1 = (await query(
       `SELECT username FROM customer WHERE username='${username}'`
