@@ -1,15 +1,13 @@
-import { Button, Form, FormControlProps, Alert } from 'react-bootstrap';
+import { useRouter } from 'next/router';
 import {
-  ChangeEventHandler,
-  useState,
-  FormEventHandler,
-  useContext,
+  ChangeEventHandler, FormEventHandler,
+  useContext, useState
 } from 'react';
+import { Alert, Button, Form, FormControlProps } from 'react-bootstrap';
+import { createMedia } from '../../api';
 import { roleRequired } from '../../decorators';
 import { AuthContext } from '../../hooks';
 import type { Media } from '../../types';
-import { createMedia } from '../../api';
-import { useRouter } from 'next/router';
 
 export default roleRequired('contentCreator', function CreateMedia() {
   const { Group, Label, Control, Select } = Form;
@@ -68,6 +66,7 @@ export default roleRequired('contentCreator', function CreateMedia() {
         <Group className='mb-3' controlId='formMediaType'>
           <Label>Media Type</Label>
           <Select aria-label='mediaType' name='type' onChange={onChange}>
+            <option value=''></option>
             <option value='game'>Game</option>
             <option value='movie'>Movie</option>
             <option value='book'>Book</option>
