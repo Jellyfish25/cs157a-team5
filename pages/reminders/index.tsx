@@ -2,8 +2,51 @@ import { Button, Form } from 'react-bootstrap';
 import Link from 'next/link';
 import styles from './reminders.module.css';
 import { roleRequired } from '../../decorators';
+import {
+  ChangeEventHandler,
+  MouseEventHandler,
+  useEffect,
+  useState,
+} from 'react';
+import { useAuth } from '../../hooks';
 
 export default roleRequired('employee', function Reminders() {
+  const [list, setList] = useState<any[]>([]);
+  const [selected, setSelected] = useState<string[]>([]);
+  const user = useAuth();
+  const handleOnChange: ChangeEventHandler<HTMLInputElement> = (event) => {
+    if (event.target.checked) {
+      setSelected([...selected, event.target.id]);
+    } else {
+      setSelected(selected.filter((title) => title != event.target.id));
+    }
+  };
+
+  const buttonPressed: MouseEventHandler<HTMLButtonElement> = async (e) => {
+    const res = await fetch('http://localhost:3000/api/sendReminders', {
+      method: 'post',
+      body: JSON.stringify({
+        username: user?.username,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    getData();
+  };
+
+  const getData = () => {
+    fetch('http://localhost:3000/api/getLateUsers')
+      .then((res) => res.json())
+      .then((data) => {
+        setList(data);
+      });
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   const { Group, Label, Control, Select } = Form;
   return (
     <section className={styles.formWrapper}>
@@ -16,16 +59,21 @@ export default roleRequired('employee', function Reminders() {
 
       <section className={styles.h1Styles}>
         <Form className={styles.form + ' ' + styles.submit}>
-          <h1>Reminders</h1>
+        <h1>Reminders</h1>
           <h6>
             Send reminders to naughty customers who forget to return their media
           </h6>
-          <Form.Check type={'checkbox'} id={`kim kard`} label={`kim kard`} />
-          <Form.Check type={'checkbox'} id={`person 2`} label={`person 2`} />
-          <Form.Check type={'checkbox'} id={`person 3`} label={`person 3`} />
-          <Form.Check type={'checkbox'} id={`person 4`} label={`person 4`} />
-          <Button variant='primary' type='submit'>
-            Send Reminders, UwU
+          {list.map((obj) => (
+            <Form.Check
+              type={'checkbox'}
+              key={`${obj.customerUsername}`}
+              id={`${obj.customerUsername}`}
+              label={`${obj.customerUsername}`}
+              onChange={handleOnChange}
+            />
+          ))}
+          <Button variant='primary' onClick={buttonPressed}>
+            Remind
           </Button>
         </Form>
       </section>
