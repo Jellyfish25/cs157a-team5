@@ -8,7 +8,6 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { setMaxListeners } from 'events';
 import { useAuth } from '../../hooks';
 
 export default roleRequired('employee', function MediaRequests() {
@@ -16,7 +15,6 @@ export default roleRequired('employee', function MediaRequests() {
   const [selected, setSelected] = useState<string[]>([]);
   const user = useAuth();
   const handleOnChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-    //console.log(selected);
     if (event.target.checked) {
       setSelected([...selected, event.target.id]);
     } else {
@@ -58,13 +56,6 @@ export default roleRequired('employee', function MediaRequests() {
   return (
     <section className={styles.formWrapper}>
       <Group className='mb-3' controlId='displayOptions'>
-        <Label>Display Options</Label>
-        <Select aria-label='UserType'>
-          <option value='Games'>Games</option>
-          <option value='Movies'>Movies</option>
-          <option value='Books'>Books</option>
-          <option value='Music'>Music</option>
-        </Select>
         <br></br>
         <Link href='/employeeHome'>Employee Home</Link>
         <br></br>
@@ -72,12 +63,6 @@ export default roleRequired('employee', function MediaRequests() {
       </Group>
 
       <section className={styles.h1Styles}>
-        <Group className='mb-3' controlId='formBasicEmail'>
-          <Control
-            type='username'
-            placeholder='Search for Media Title'></Control>
-        </Group>
-        <br></br>
         <Form className={styles.form + ' ' + styles.submit}>
           <h1>Media Requests</h1>
           <h6>

@@ -1,5 +1,5 @@
 import styles from './customerMedia.module.css';
-import MediaTable from '../../components/mediaTable';
+import { MediaTable } from '../../components/';
 import { Button, Form } from 'react-bootstrap';
 
 export default function customerMedia() {
