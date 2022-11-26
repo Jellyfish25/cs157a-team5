@@ -2,8 +2,19 @@ import { Button, Form } from 'react-bootstrap';
 import Link from 'next/link';
 import styles from './mediaRequests.module.css';
 import { roleRequired } from '../../decorators';
+import { useEffect, useState } from 'react';
 
-export default roleRequired('employee', function mediaRequests() {
+export default roleRequired('employee', function MediaRequests() {
+  const [list, setList] = useState([]);
+  const [selected, setSelected] = useState([]);
+  
+  useEffect(() => {
+    fetch('http://localhost:3000/api/getRequests').then((res) =>
+      res.json()).then((data) => {
+        setList(data);
+      });
+  },[]);
+
   const { Group, Label, Control, Select } = Form;
   return (
     <section className={styles.formWrapper}>
@@ -34,14 +45,7 @@ export default roleRequired('employee', function mediaRequests() {
             Approve the wholesome, family-friendly media requests and deny the
             meany weany naughty media requests.
           </h6>
-          <Form.Check type={'checkbox'} id={`Smile`} label={`Smile`} />
-          <Form.Check type={'checkbox'} id={`Joker`} label={`Joker`} />
-          <Form.Check
-            type={'checkbox'}
-            id={`The Human Centipede`}
-            label={`The Human Centipede`}
-          />
-          <Form.Check type={'checkbox'} id={`One Piece`} label={`One Piece`} />
+          {list.map((obj) => <Form.Check type={'checkbox'} key={`${obj.mediaTitle}`} id={`${obj.mediaTitle}`} label={`${obj.mediaTitle}`}/>)}
           <Button variant='primary' type='submit'>
             Approve
           </Button>
