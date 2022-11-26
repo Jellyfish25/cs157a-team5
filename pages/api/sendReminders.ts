@@ -4,21 +4,32 @@ import query from '../../database';
 const handler: NextApiHandler = async (req, res) => {
   //const today = Date().toString().slice(0, 19).replace('T', ' ');
   const { names, username } = req.body;
+  try {
   for (const name of names) {
-    const lateName = await query(`SELECT customerUsername FROM reminded WHERE customerUsername = '${name}`);
+    console.log(name);
+    const lateName : any = await query(`SELECT customerUsername FROM reminded WHERE customerUsername = '${name}'`);
     // if name is not in reminded table
-    if(lateName == '') {
+    const date = new Date().toISOString().slice(0, 19).replace('T', ' ').split(" ")[0];
+
+    if(!lateName[0]) {
         //  insert into table a tuple
-        await query(`INSERT INTO reminded VALUES('${username}, ${name}, 1, '${new Date().toISOString().slice(0, 19).replace('T', ' ')}')`);
+        //console.log(lateName);
+        await query(`INSERT INTO reminded VALUES('${username}', '${name}', 1, '${date}')`);
     }
     else {
     // else
     //  update reminderCount,lastDateReminded, and employeeUsername for the name that will be reminded
+    console.log("valid condition");
     const lateUsers = await query(
-        `UPDATE reminded SET reminderCount = reminderCount + 1, lastDateReminded = '${new Date().toISOString().slice(0, 19).replace('T', ' ')}', 
+        `UPDATE reminded SET reminderCount = reminderCount + 1, lastDateReminded = '${date}', 
         employeeUsername = '${username}' WHERE customerUsername = '${name}'`);
     }
   }
   res.status(200).end();
+}
+catch (e) {
+    console.log(e);
+    res.status(500).end();
+}
 };
 export default handler; 

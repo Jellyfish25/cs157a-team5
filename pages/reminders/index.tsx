@@ -26,6 +26,7 @@ export default roleRequired('employee', function Reminders() {
     const res = await fetch('http://localhost:3000/api/sendReminders', {
       method: 'post',
       body: JSON.stringify({
+        names: selected,
         username: user?.username,
       }),
       headers: {
