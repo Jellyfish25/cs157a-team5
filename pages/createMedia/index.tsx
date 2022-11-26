@@ -8,6 +8,7 @@ import { createMedia } from '../../api';
 import { roleRequired } from '../../decorators';
 import { AuthContext } from '../../hooks';
 import type { Media } from '../../types';
+import Link from 'next/link';
 
 export default roleRequired('contentCreator', function CreateMedia() {
   const { Group, Label, Control, Select } = Form;
@@ -42,6 +43,10 @@ export default roleRequired('contentCreator', function CreateMedia() {
 
   return (
     <section>
+      <Link href='/contentCreatorHome'>Home</Link>
+      <br></br>
+      <Link href='/deleteMedia'>Delete</Link>
+      <br></br>
       <Form onSubmit={onSubmit}>
         <Group className='mb-3' controlId='formTitle'>
           <Label>Title</Label>
