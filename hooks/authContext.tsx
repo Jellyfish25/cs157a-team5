@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import type { User } from '../types';
 import type { ReactNode } from 'react';
 import { useUserCookie } from './useUserCookie';
@@ -14,3 +14,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     </AuthContext.Provider>
   );
 };
+
+export const useAuth = () => useContext(AuthContext);
+export default useAuth;
