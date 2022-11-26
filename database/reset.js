@@ -22,19 +22,19 @@ const medias = require('../mocks/media.json');
   );`);
 
   await db.query(`CREATE TABLE Customer(
-    username varchar(255) NOT NULL,
+    username varchar(255) PRIMARY KEY NOT NULL,
     paymentMethod varchar(15) CHECK (paymentMethod = 'credit card' OR paymentMethod = 'debit card' OR paymentMethod = 'gift card'),
     FOREIGN KEY (username) REFERENCES User(username)
   );`);
 
   await db.query(`CREATE TABLE Employee(
-    username varchar(255) NOT NULL,
+    username varchar(255) PRIMARY KEY NOT NULL,
     hourlyWage REAL,
     FOREIGN KEY (username) REFERENCES User(username)
   );`);
 
   await db.query(`CREATE TABLE ContentCreator(
-    username varchar(255),
+    username varchar(255) PRIMARY KEY,
     reputationRating REAL CHECK (reputationRating BETWEEN 0 AND 5),
     FOREIGN KEY (username) REFERENCES User(username)
   );`);
@@ -48,12 +48,11 @@ const medias = require('../mocks/media.json');
 
   await db.query(`CREATE TABLE Reminded(
     employeeUsername VARCHAR(255) NOT NULL,
-    customerUsername VARCHAR(255) NOT NULL,
+    customerUsername VARCHAR(255) PRIMARY KEY NOT NULL,
     reminderCount INTEGER,
     lastDateReminded DATE,
     FOREIGN KEY (employeeUsername) REFERENCES Employee(username),
-    FOREIGN KEY (customerUsername) REFERENCES Customer(username)
-    );`);
+    FOREIGN KEY (customerUsername) REFERENCES Customer(username));`);
 
   await db.query(`CREATE TABLE Reviewed(
     employeeUsername VARCHAR(255) NOT NULL,
@@ -61,7 +60,8 @@ const medias = require('../mocks/media.json');
     decision VARCHAR(20) CHECK (decision = 'approved' OR decision = 'denied' OR decision = 'pending'),
     reason VARCHAR(255),
     FOREIGN KEY (employeeUsername) REFERENCES Employee(username),
-    FOREIGN KEY (mediaTitle) REFERENCES Media(title)
+    FOREIGN KEY (mediaTitle) REFERENCES Media(title),
+    PRIMARY KEY(employeeUsername, mediaTitle)
     );`);
 
   await db.query(`CREATE TABLE Rented(
@@ -69,7 +69,8 @@ const medias = require('../mocks/media.json');
     mediaTitle VARCHAR(255) NOT NULL,
     dueDate DATE,
     FOREIGN KEY (customerUsername) REFERENCES Customer(username),
-    FOREIGN KEY (mediaTitle) REFERENCES Media(title)
+    FOREIGN KEY (mediaTitle) REFERENCES Media(title),
+    PRIMARY KEY(customerUsername, mediaTitle)
   );`);
 
   await db.query(`CREATE TABLE Evaluated(
@@ -78,7 +79,8 @@ const medias = require('../mocks/media.json');
     rating REAL CHECK (rating BETWEEN 0 AND 5),
     comment VARCHAR(255),
     FOREIGN KEY (customerUsername) REFERENCES Customer(username),
-    FOREIGN KEY (mediaTitle) REFERENCES Media(title)
+    FOREIGN KEY (mediaTitle) REFERENCES Media(title),
+    PRIMARY KEY(customerUsername, mediaTitle)
     );`);
 
   await db.query(`CREATE TABLE Created(
@@ -86,7 +88,8 @@ const medias = require('../mocks/media.json');
     mediaTitle VARCHAR(255) NOT NULL,
     dateCreated DATE,
     FOREIGN KEY (creatorUsername) REFERENCES ContentCreator(username),
-    FOREIGN KEY (mediaTitle) REFERENCES Media(title)
+    FOREIGN KEY (mediaTitle) REFERENCES Media(title),
+    PRIMARY KEY(creatorUsername, mediaTitle)
   );`);
 
   let i = 0;
@@ -141,14 +144,6 @@ const medias = require('../mocks/media.json');
   }
 
   for (let i = 0; i < 10; i++) {
-    await db.query(
-      `INSERT INTO Reminded VALUES('${getRandom(employees).username}', '${
-        getRandom(customers).username
-      }', ${Math.floor(Math.random() * 4)}, '${new Date()
-        .toISOString()
-        .slice(0, 19)
-        .replace('T', ' ')}')`
-    );
     const decision = getRandom(['approved', 'denied', 'pending']);
     const reason = (() => {
       if (decision == 'approved') return 'No Problems.';
@@ -176,7 +171,19 @@ const medias = require('../mocks/media.json');
         'Awesome!',
       ])}')`
     );
+    await db.query(
+      `INSERT INTO Reminded VALUES('${getRandom(employees).username}', '${
+        customers.pop(getRandom(customers)).username
+      }', ${Math.floor(Math.random() * 4)}, '${new Date()
+        .toISOString()
+        .slice(0, 19)
+        .replace('T', ' ')}')`
+    );
   }
+  await db.query(`INSERT INTO user VALUES('u','u'),('e','e'),('c','c')`)
+  await db.query(`INSERT INTO customer VALUES('u','credit card')`)
+  await db.query(`INSERT INTO employee VALUES('e',5.99)`)
+  await db.query(`INSERT INTO contentcreator VALUES('c',4.35)`)
   await db.end();
   db.quit();
 
