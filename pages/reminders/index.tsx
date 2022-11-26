@@ -8,13 +8,6 @@ export default roleRequired('employee', function Reminders() {
   return (
     <section className={styles.formWrapper}>
       <Group className='mb-3' controlId='displayOptions'>
-        <Label>Display Options</Label>
-        <Select aria-label='UserType'>
-          <option value='Games'>Games</option>
-          <option value='Movies'>Movies</option>
-          <option value='Books'>Books</option>
-          <option value='Music'>Music</option>
-        </Select>
         <br></br>
         <Link href='/employeeHome'>Employee Home</Link>
         <br></br>
@@ -22,12 +15,6 @@ export default roleRequired('employee', function Reminders() {
       </Group>
 
       <section className={styles.h1Styles}>
-        <Group className='mb-3' controlId='formBasicEmail'>
-          <Control
-            type='username'
-            placeholder='Search for Media Title'></Control>
-        </Group>
-        <br></br>
         <Form className={styles.form + ' ' + styles.submit}>
           <h1>Reminders</h1>
           <h6>

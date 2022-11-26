@@ -63,12 +63,6 @@ export default roleRequired('employee', function MediaRequests() {
       </Group>
 
       <section className={styles.h1Styles}>
-        <Group className='mb-3' controlId='formBasicEmail'>
-          <Control
-            type='username'
-            placeholder='Search for Media Title'></Control>
-        </Group>
-        <br></br>
         <Form className={styles.form + ' ' + styles.submit}>
           <h1>Media Requests</h1>
           <h6>

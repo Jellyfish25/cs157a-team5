@@ -1,5 +1,4 @@
 import styles from './customerHome.module.css';
-import { MediaTable } from '../../components';
 import { Button, Form } from 'react-bootstrap';
 import { roleRequired } from '../../decorators';
 import { useEffect, useState } from 'react';
@@ -24,17 +23,19 @@ export default roleRequired('customer', function CustomerHome() {
   return (
     <section className={styles.formWrapper}>
       <section className={styles.h1Styles}>
-      <h1>Customer Homepage</h1>
-        <h6>
-          Pick one!
-        </h6>
+        <h1>Customer Homepage</h1>
+        <h6>Pick one!</h6>
         <br></br>
         {list.map((obj) => (
-            <>
-            <Link href={`/customerMedia/${obj.title}`} key={obj.title}>{`${obj.title}, cost=${obj.cost}, inventory=${obj.inventory}, type=${obj.type}`}</Link>
+          <>
+            <Link
+              href={`/customerMedia/${obj.title}`}
+              key={
+                obj.title
+              }>{`${obj.title}, cost=${obj.cost}, inventory=${obj.inventory}, type=${obj.type}`}</Link>
             <br></br>
-            </>
-          ))}
+          </>
+        ))}
       </section>
 
       <section>Hello, Customer!</section>
