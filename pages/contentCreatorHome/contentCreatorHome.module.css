@@ -1,31 +1,30 @@
 .formWrapper {
-    align-items: top;
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-    margin-right: 350px;
-  }
-  
-  .h1Styles {
-    background-color: 'rgb(255, 255, 255)';
-    position: 'absolute';
-    right: 0;
-    bottom: '2rem';
-    padding: '0.5rem';
-    font-family: 'sans-serif';
-    font-size: '1.5rem';
-    box-shadow: '0 0 10px rgba(0, 0, 0, 0.3)';
-  }
+  align-items: top;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  margin-right: 350px;
+}
 
-  .titleStyle {
-    font-size: 50px;
-    text-align: center;
-  }
+.h1Styles {
+  background-color: 'rgb(255, 255, 255)';
+  position: 'absolute';
+  right: 0;
+  bottom: '2rem';
+  padding: '0.5rem';
+  font-family: 'sans-serif';
+  font-size: '1.5rem';
+  box-shadow: '0 0 10px rgba(0, 0, 0, 0.3)';
+}
 
-  .fontStyle {
-    margin-top: 100px;
-    margin-right: 50px;
-    font-size: 25px;
-    text-align: center;
-  }
-  
+.titleStyle {
+  font-size: 50px;
+  text-align: center;
+}
+
+.fontStyle {
+  margin-top: 100px;
+  margin-right: 50px;
+  font-size: 25px;
+  text-align: center;
+}

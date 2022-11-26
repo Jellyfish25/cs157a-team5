@@ -30,8 +30,10 @@ export default async function handler(
         .replace('T', ' ')}')`
     );
 
-    await query(`INSERT INTO reviewed VALUES('Ruthanne', '${title}', 'pending', '')`);
-    
+    await query(
+      `INSERT INTO reviewed VALUES('Ruthanne', '${title}', 'pending', '')`
+    );
+
     res.status(201).json({ message: 'Success! Rediecting you to homepage...' });
     return;
   } catch (error) {
