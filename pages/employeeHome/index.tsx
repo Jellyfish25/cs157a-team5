@@ -35,8 +35,8 @@ export default roleRequired('employee', function EmployeeHome() {
         {list.map((obj) => (
           <>
             <Link
-              href={`/employeeMedia/${obj.title}`}
-              key={obj.title}>{`${obj.title}`}</Link>
+              href={`/employeeMedia/${obj.mediaTitle}`}
+              key={obj.mediaTitle}>{`${obj.mediaTitle}`}</Link>
             <br></br>
           </>
         ))}

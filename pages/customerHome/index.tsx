@@ -46,11 +46,11 @@ export default roleRequired('customer', function CustomerHome() {
       </Form>
         <br></br>
         <h6>Pick one!</h6>
-        {list.map((obj) => {if (obj.title.includes(searchTerm)) {return (
+        {list.map((obj) => {if (obj.mediaTitle.includes(searchTerm)) {return (
           <>
             <Link
-              href={`/customerMedia/${obj.title}`}
-              key={obj.title}>{`${obj.title}`}</Link>
+              href={`/customerMedia/${obj.mediaTitle}`}
+              key={obj.mediaTitle}>{`${obj.mediaTitle}`}</Link>
             <br></br>
           </>
         )}})}
