@@ -8,6 +8,7 @@ import {
 import { Button, Form } from 'react-bootstrap';
 import { useAuth } from '../../hooks';
 import styles from './customerMedia.module.css';
+import Link from 'next/link';
 
 export default function MediaPage() {
   const user = useAuth();
@@ -67,6 +68,7 @@ export default function MediaPage() {
 
   return (
     <div>
+      <Link href='/customerHome'>Home</Link>
       <h1>{media?.title}</h1>
       <h3>{'Cost: $' + media?.cost}</h3>
       <h3>{'Current inventory: ' + media?.inventory}</h3>
