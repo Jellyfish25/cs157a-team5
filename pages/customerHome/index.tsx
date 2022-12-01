@@ -30,9 +30,7 @@ export default roleRequired('customer', function CustomerHome() {
           <>
             <Link
               href={`/customerMedia/${obj.title}`}
-              key={
-                obj.title
-              }>{`${obj.title}, cost=${obj.cost}, inventory=${obj.inventory}, type=${obj.type}`}</Link>
+              key={obj.title}>{`${obj.title}`}</Link>
             <br></br>
           </>
         ))}

@@ -36,9 +36,7 @@ export default roleRequired('employee', function EmployeeHome() {
           <>
             <Link
               href={`/employeeMedia/${obj.title}`}
-              key={
-                obj.title
-              }>{`${obj.title}, cost=${obj.cost}, inventory=${obj.inventory}, type=${obj.type}`}</Link>
+              key={obj.title}>{`${obj.title}`}</Link>
             <br></br>
           </>
         ))}
