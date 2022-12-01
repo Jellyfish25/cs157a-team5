@@ -34,7 +34,9 @@ export default async function handler(
       `INSERT INTO reviewed VALUES('Ruthanne', '${title}', 'pending', '')`
     );
 
-    res.status(201).json({ message: 'Success! Rediecting you to homepage...' });
+    res
+      .status(201)
+      .json({ message: 'Success! Redirecting you to homepage...' });
     return;
   } catch (error) {
     const e = error as SQLError;

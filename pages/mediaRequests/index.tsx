@@ -36,6 +36,7 @@ export default roleRequired('employee', function MediaRequests() {
         },
       });
       getData();
+      setSelected([]);
     };
     return fetchFunct;
   };
