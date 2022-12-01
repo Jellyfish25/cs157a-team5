@@ -56,7 +56,7 @@ const medias = require('../mocks/media.json');
 
   await db.query(`CREATE TABLE Reviewed(
     employeeUsername VARCHAR(255) NOT NULL,
-    mediaTitle VARCHAR(255) NOT NULL,
+    mediaTitle VARCHAR(255) UNIQUE NOT NULL,
     decision VARCHAR(20) CHECK (decision = 'approved' OR decision = 'denied' OR decision = 'pending'),
     reason VARCHAR(255),
     FOREIGN KEY (employeeUsername) REFERENCES Employee(username),
@@ -143,26 +143,44 @@ const medias = require('../mocks/media.json');
     );
   }
 
+  let [empCopy, medCopy] = copy(employees, medias)
   for (let i = 0; i < 10; i++) {
-    const decision = getRandom(['approved', 'denied', 'pending']);
+    const [decision] = getRandom(['approved', 'denied', 'pending']);
     const reason = (() => {
       if (decision == 'approved') return 'No Problems.';
       else if (decision == 'denied') return 'Inappropriate Content.';
       else return '';
     })();
+    const [e, eI] = getRandom(empCopy)
+    empCopy.splice(eI, 1)
+    const [m, mI] = getRandom(medCopy)
+    medCopy.splice(mI, 1)
     await db.query(
-      `INSERT INTO Reviewed VALUES('${getRandom(employees).username}', '${
-        getRandom(medias).title
+      `INSERT INTO Reviewed VALUES('${e.username}', '${m.title
       }', '${decision}', '${reason}')`
     );
+  }
+
+  let [cCopy] = copy(customers)
+  medCopy = [...medias]
+  for (let i = 0; i < 10; i++) {
+    const [c, cI] = getRandom(cCopy)
+    cCopy.splice(cI, 1)
+    const [m, mI] = getRandom(medCopy)
+    medCopy.splice(mI, 1)
     await db.query(
-      `INSERT INTO rented VALUES('${getRandom(customers).username}', '${
-        getRandom(medias).title
+      `INSERT INTO rented VALUES('${c.username}', '${m.title
       }', '${new Date().toISOString().slice(0, 19).replace('T', ' ')}')`
     );
+  }
+  [cCopy, medCopy] = copy(customers, medias)
+  for (let i = 0; i < 10; i++) {
+    const [c, cI] = getRandom(cCopy)
+    cCopy.splice(cI, 1)
+    const [m, mI] = getRandom(medCopy)
+    medCopy.splice(mI, 1)
     await db.query(
-      `INSERT INTO evaluated VALUES('${getRandom(customers).username}', '${
-        getRandom(medias).title
+      `INSERT INTO evaluated VALUES('${c.username}', '${m.title
       }', ${Math.round((Math.random() * 4 + 1) * 10) / 10}, '${getRandom([
         'Alright.',
         'Poor',
@@ -171,9 +189,16 @@ const medias = require('../mocks/media.json');
         'Awesome!',
       ])}')`
     );
+  }
+  [cCopy, empCopy] = copy(customers, employees)
+  for (let i = 0; i < 10; i++) {
+    const [c, cI] = getRandom(cCopy)
+    cCopy.splice(cI, 1)
+    const [e, eI] = getRandom(empCopy)
+    empCopy.splice(eI, 1)
     await db.query(
-      `INSERT INTO Reminded VALUES('${getRandom(employees).username}', '${
-        customers.pop(getRandom(customers)).username
+      `INSERT INTO Reminded VALUES('${e.username}', '${
+        c.username
       }', ${Math.floor(Math.random() * 4)}, '${new Date()
         .toISOString()
         .slice(0, 19)
@@ -191,5 +216,8 @@ const medias = require('../mocks/media.json');
 })();
 
 const getRandom = (arr) => {
-  return arr[Math.floor(Math.random() * arr.length)];
+  const index = Math.floor(Math.random() * arr.length)
+  return [ arr[index], index ];
 };
+
+const copy = (a, b) => [[...a], b ? [...b] : null]
