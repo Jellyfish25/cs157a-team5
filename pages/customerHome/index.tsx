@@ -35,7 +35,6 @@ export default roleRequired('customer', function CustomerHome() {
     <section className={styles.formWrapper}>
       <section className={styles.h1Styles}>
         <h1>Customer Homepage</h1>
-        <h6>Pick one!</h6>
         <Form>
           <Form.Group>
             <Form.Label>Search here!</Form.Label>
@@ -46,6 +45,7 @@ export default roleRequired('customer', function CustomerHome() {
           </Form.Group>
       </Form>
         <br></br>
+        <h6>Pick one!</h6>
         {list.map((obj) => {if (obj.title.includes(searchTerm)) {return (
           <>
             <Link
@@ -55,7 +55,6 @@ export default roleRequired('customer', function CustomerHome() {
           </>
         )}})}
       </section>
-
       <section>Hello, Customer!</section>
     </section>
   );
