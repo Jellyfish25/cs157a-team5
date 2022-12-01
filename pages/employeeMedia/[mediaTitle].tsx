@@ -7,6 +7,7 @@ import {
 } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useAuth } from '../../hooks';
+import Link from 'next/link';
 
 export default function MediaPage() {
   const user = useAuth();
@@ -52,6 +53,7 @@ export default function MediaPage() {
 
   return (
     <div>
+      <Link href='/employeeHome'>Employee Home</Link>
       <h1>{media?.title}</h1>
       <h3>{'Current inventory: ' + media?.inventory}</h3>
       <Form>

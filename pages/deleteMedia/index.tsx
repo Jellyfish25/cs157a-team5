@@ -8,6 +8,8 @@ import {
   useState,
 } from 'react';
 import { useAuth } from '../../hooks';
+import Link from 'next/link';
+
 
 export default roleRequired('contentCreator', function DeleteMedia() {
   const [list, setList] = useState<any[]>([]);
@@ -51,6 +53,9 @@ export default roleRequired('contentCreator', function DeleteMedia() {
   return (
     <section className={styles.formWrapper}>
       <section className={styles.h1Styles}>
+      <Link href='/contentCreatorHome'>Home</Link>
+      <br></br>
+      <Link href='/createMedia'>Create</Link>
         <Form className={styles.form + ' ' + styles.submit}>
           <h1>Your Created Media</h1>
           <h6>Delete media here.</h6>
