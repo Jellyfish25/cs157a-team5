@@ -73,5 +73,3 @@ Requires [git](https://git-scm.com/downloads) and [NodeJs](https://nodejs.org/en
 - .eslint, next.config.js, tsconfig <- ignore these. They define the structure of our code.
 - package.json <- defines scripts and dependencies. Ignore for now
 - package-lock.json <- defines exact version numbers of dependencies.
-
-### yeet
