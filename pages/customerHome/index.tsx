@@ -46,7 +46,7 @@ export default roleRequired('customer', function CustomerHome() {
       </Form>
         <br></br>
         <h6>Pick one!</h6>
-        {list.map((obj) => {if (obj.mediaTitle.includes(searchTerm)) {return (
+        {list.map((obj) => {if (obj.mediaTitle.toLowerCase().includes(searchTerm.toLowerCase())) {return (
           <>
             <Link
               href={`/customerMedia/${obj.mediaTitle}`}
